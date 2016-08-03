@@ -63,7 +63,7 @@
     chart.middleColor             = [UIColor colorWithRed:77. / 255. green:245. / 255. blue:255. / 255. alpha:1];
     chart.endColor                = [UIColor colorWithRed:15. / 255. green:255. / 255. blue:160. / 255. alpha:1];
     chart.progress = 0;
-    
+    chart.animationDuration = 1.5;
     self.chart = chart;
     [self.view addSubview:chart];
     
@@ -100,9 +100,7 @@
     [self.view addSubview:chart2];
     
     
-    
-    
-    
+
     [self performSelector:@selector(test) withObject:nil afterDelay:2];
 }
 
@@ -112,6 +110,17 @@
     [self.chart1 setProgress:0.9 animated:YES];
     [self.chart2 setProgress:0.8 animated:YES];
 
+    [self performSelector:@selector(test1) withObject:nil afterDelay:2];
+
+}
+
+-(void) test1
+{
+    [self.chart setProgress:0 animated:YES];
+    [self.chart1 setProgress:0 animated:YES];
+    [self.chart2 setProgress:0 animated:YES];
+    
+    [self performSelector:@selector(test) withObject:nil afterDelay:2];
 }
 
 - (void)didReceiveMemoryWarning {

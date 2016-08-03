@@ -265,25 +265,15 @@
     
     if (animated) {
         
-        CABasicAnimation * pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-        pathAnimation.duration            = self.animationDuration;
-        pathAnimation.timingFunction      = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        pathAnimation.toValue             = @(progress);
-        pathAnimation.autoreverses        = NO;
-        pathAnimation.removedOnCompletion = NO;
-        pathAnimation.delegate            = self;
-        [self.progressTrackLayer addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+        [CATransaction begin];
+        [CATransaction setAnimationDuration:self.animationDuration];
+        self.progressTrackLayer.strokeEnd = progress;
+        [CATransaction commit];
     }
     else{
         
         self.progressTrackLayer.strokeEnd = self.progress;
     }
-}
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
-    self.progressTrackLayer.strokeEnd = self.progress;
-    [self.progressTrackLayer removeAllAnimations];
 }
 
 @end
